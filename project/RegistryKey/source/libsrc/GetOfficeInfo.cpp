@@ -1,7 +1,7 @@
 #include "GetOfficeInfo.h"
 #include <io.h>
+#include "RegistryKey.h"
 #include "winSystem/WinSystem.h"
-#include "RegistryKey/RegistryKey.h"
 #include <algorithm>
 #include <Shlwapi.h>
 #include <ShlGuid.h>

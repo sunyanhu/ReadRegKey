@@ -1,5 +1,6 @@
 #include "Utils.h"
-
+namespace OCLS
+{
 const LPTSTR GetLastErrorMessage(DWORD last_error)
 {
 	static TCHAR errmsg[512];
@@ -18,4 +19,4 @@ const LPTSTR GetLastErrorMessage(DWORD last_error)
 
 	return(errmsg);
 }
-
+}

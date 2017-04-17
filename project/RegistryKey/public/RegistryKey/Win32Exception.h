@@ -15,28 +15,29 @@
 
 #pragma warning(disable: 4201)
 
-
+namespace OCLS
+{
 class CLSException
 {
 public:
-	CLSException();
+    CLSException();
 
-	CLSException(
-		const LPCTSTR pWhere,
-		DWORD error);
+    CLSException(
+        const LPCTSTR pWhere,
+        DWORD error);
 
-	DWORD GetError() const;
+    DWORD GetError() const;
 
-	LPCTSTR GetWhere() const;
+    LPCTSTR GetWhere() const;
 
-	virtual LPCTSTR GetMessage() const;
+    virtual LPCTSTR GetMessage() const;
 
-	void MessageBox(HWND hWnd = NULL) const;
+    void MessageBox(HWND hWnd = NULL) const;
 
 private:
 
-	LPCTSTR m_pWhere;
-	DWORD m_error;
+    LPCTSTR m_pWhere;
+    DWORD m_error;
 };
-
+}
 #endif // __WIN32_EXCEPTION__

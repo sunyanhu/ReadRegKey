@@ -21,45 +21,12 @@
     <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\Export.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\CountedRegKey.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\ExpandableBuffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\ReferenceCounted.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\RegistryKey.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\RegKeyIterator.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\Utils.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\Win32Exception.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\GetOfficeInfo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\project\GetOfficeInfo\source\dllsrc\DllMain.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\RegistryKey.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\RegKeyIterator.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\Utils.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\Win32Exception.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

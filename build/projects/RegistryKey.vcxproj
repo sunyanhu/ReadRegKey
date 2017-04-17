@@ -10,30 +10,22 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\project\GetOfficeInfo_test\include\test.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\project\GetOfficeInfo_test\source\test.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AD5B6B0A-CA7C-438E-AA60-E0067A55ED99}</ProjectGuid>
-    <Keyword>Win32Proj</Keyword>
-    <RootNamespace>GetLocalMachineOfficeVersion_Test</RootNamespace>
-    <ProjectName>GetOfficeInfo_Test</ProjectName>
+    <ProjectGuid>{A21047DD-B47D-4936-B38E-47B48625427B}</ProjectGuid>
+    <RootNamespace>RegistryKey</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
-    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -46,53 +38,61 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>../../dist</OutDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
+    <OutDir>../../dist/</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>../../dist/</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;MAKINGDLL_GETOFFICEINFO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../project/GetOfficeInfo_test/include;../../project/GetOfficeInfo_test/source;../../.xpm/depends/public;../../project/GetOfficeInfo/public/GetOfficeInfo;../../project/GetOfficeInfo/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;MAKINGDLL_REGISTRYKEY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../project/RegistryKey/public/RegistryKey;../../project/RegistryKey/include;../../.xpm/depends/public/;../../project/RegistryKey/source/libsrc;../../project/RegistryKey/source/dllsrc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OutputFile>$(OutDir)$(TargetName)_d$(TargetExt)</OutputFile>
       <AdditionalLibraryDirectories>../../dist;../../.xpm/depends/dist;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalDependencies>GetOfficeInfo_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(OutDir)$(TargetName)_d.lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>MAKINGDLL_GETOFFICEINFO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../project/GetOfficeInfo_test/include;../../project/GetOfficeInfo_test/source;../../.xpm/depends/public;../../project/GetOfficeInfo/include;../../project/GetOfficeInfo/public/GetOfficeInfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../project/RegistryKey/public/RegistryKey;../../project/RegistryKey/include;../../.xpm/depends/public/;../../project/RegistryKey/source/libsrc;../../project/RegistryKey/source/dllsrc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MAKINGDLL_REGISTRYKEY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>../../.xpm/depends/dist;../../dist;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GetOfficeInfo.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../dist;../../.xpm/depends/dist;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\project\RegistryKey\public\RegistryKey\CountedRegKey.h" />
+    <ClInclude Include="..\..\project\RegistryKey\public\RegistryKey\ExpandableBuffer.h" />
+    <ClInclude Include="..\..\project\RegistryKey\public\RegistryKey\Export.h" />
+    <ClInclude Include="..\..\project\RegistryKey\public\RegistryKey\ReferenceCounted.h" />
+    <ClInclude Include="..\..\project\RegistryKey\public\RegistryKey\RegistryKey.h" />
+    <ClInclude Include="..\..\project\RegistryKey\public\RegistryKey\RegKeyIterator.h" />
+    <ClInclude Include="..\..\project\RegistryKey\public\RegistryKey\Utils.h" />
+    <ClInclude Include="..\..\project\RegistryKey\public\RegistryKey\Win32Exception.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\project\RegistryKey\source\dllsrc\DllMain.cpp" />
+    <ClCompile Include="..\..\project\RegistryKey\source\libsrc\RegistryKey.cpp" />
+    <ClCompile Include="..\..\project\RegistryKey\source\libsrc\RegKeyIterator.cpp" />
+    <ClCompile Include="..\..\project\RegistryKey\source\libsrc\Utils.cpp" />
+    <ClCompile Include="..\..\project\RegistryKey\source\libsrc\Win32Exception.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

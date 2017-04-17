@@ -11,23 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\CountedRegKey.h" />
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\ExpandableBuffer.h" />
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\ReferenceCounted.h" />
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\RegistryKey.h" />
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\RegKeyIterator.h" />
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\Utils.h" />
-    <ClInclude Include="..\..\project\GetOfficeInfo\include\Win32Exception.h" />
     <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\Export.h" />
     <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\GetOfficeInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\project\GetOfficeInfo\source\dllsrc\DllMain.cpp" />
     <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\GetOfficeInfo.cpp" />
-    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\RegistryKey.cpp" />
-    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\RegKeyIterator.cpp" />
-    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\Utils.cpp" />
-    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\Win32Exception.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2D088CD8-8C70-4059-ACEA-E59B3B6ADDFE}</ProjectGuid>
@@ -59,17 +48,17 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>../../dist</OutDir>
+    <OutDir>../../dist/</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>../../dist</OutDir>
+    <OutDir>../../dist/</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../project/GetOfficeInfo/public/GetOfficeInfo;../../project/GetOfficeInfo/include;../../project/GetOfficeInfo/source/libsrc;../../project/GetOfficeInfo/source/dllsrc;../../.xpm/depends/public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../project/GetOfficeInfo/public/GetOfficeInfo;../../project/GetOfficeInfo/include;../../.xpm/depends/public/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDLL;_DEBUG;_USRDLL;MAKINGDLL_GETOFFICEINFO;USINGDLL_GETOFFICEINFO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -80,7 +69,7 @@
       <ManifestFile>$(IntDir)$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
       <ProfileGuidedDatabase>$(OutDir)$(TargetName).pgd</ProfileGuidedDatabase>
-      <AdditionalDependencies>Shlwapi.lib;win_systemd.lib;osald.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Shlwapi.lib;win_systemd.lib;osald.lib;RegistryKey_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -90,7 +79,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>MAKINGDLL_GETOFFICEINFO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MAKINGDLL_GETOFFICEINFO;USINGDLL_REGISTRYKEY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../project/GetOfficeInfo/public/GetOfficeInfo;../../project/GetOfficeInfo/include;../../project/GetOfficeInfo/source/libsrc;../../project/GetOfficeInfo/source/dllsrc;../../.xpm/depends/public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -98,7 +87,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>../../.xpm/depends/dist;../../dist;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>shlwapi.lib;win_system.lib;osal.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shlwapi.lib;win_system.lib;osal.lib;RegistryKey.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

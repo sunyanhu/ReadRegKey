@@ -1,6 +1,7 @@
 #include "Win32Exception.h"
 #include "Utils.h"
-
+namespace OCLS
+{
 CLSException::CLSException(
 	const LPCTSTR pWhere,
 	DWORD error)
@@ -34,4 +35,5 @@ LPCTSTR CLSException::GetMessage() const
 void CLSException::MessageBox(HWND hWnd /* = NULL */) const
 {
 	::MessageBox(hWnd, GetMessage(), m_pWhere, MB_ICONSTOP);
+}
 }

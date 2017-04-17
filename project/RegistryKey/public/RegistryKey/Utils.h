@@ -30,17 +30,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Functions defined in this file...
 ///////////////////////////////////////////////////////////////////////////////
-
+namespace OCLS
+{
 inline bool BOOL_to_bool(const BOOL bResult)
 {
-	// Convert a make believe BOOL into a real bool.
-	// Removes warning C4800...
+    // Convert a make believe BOOL into a real bool.
+    // Removes warning C4800...
 
-	return (TRUE == bResult);
+    return (TRUE == bResult);
 }
 
 const LPTSTR GetLastErrorMessage(DWORD last_error);
-
-
+}
 #endif // __UTILS__
 

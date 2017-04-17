@@ -1,6 +1,7 @@
 #ifndef __REG_KEY_ITERATOR__
 #define __REG_KEY_ITERATOR__
 #include "CountedRegKey.h"
+#include "Export.h"
 
 namespace OCLS
 {
@@ -10,7 +11,7 @@ class CRegKeyIterator;
 class CRegistryKey;
 class CRegistryKeyCounted;
 
-class CRegKeyIterator
+class OCLS_REGISTRYKEY_API CRegKeyIterator
 {
 public:
 
