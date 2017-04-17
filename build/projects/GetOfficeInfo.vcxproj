@@ -12,11 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\Export.h" />
-    <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\GetOfficeInfo.h" />
+    <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\OfficeInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\project\GetOfficeInfo\source\dllsrc\DllMain.cpp" />
-    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\GetOfficeInfo.cpp" />
+    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\OfficeInfo.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2D088CD8-8C70-4059-ACEA-E59B3B6ADDFE}</ProjectGuid>

@@ -15,18 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\GetOfficeInfo.h">
+    <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\Export.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\Export.h">
+    <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\OfficeInfo.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\GetOfficeInfo.cpp">
+    <ClCompile Include="..\..\project\GetOfficeInfo\source\dllsrc\DllMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\project\GetOfficeInfo\source\dllsrc\DllMain.cpp">
+    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\OfficeInfo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

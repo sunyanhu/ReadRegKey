@@ -5,7 +5,7 @@ int main(void)
 {
 	//MessageBoxA(NULL, "Test", "Test", 0);
 	cout.imbue(locale(""));
-	OCLS::CGetOfficeInfo getVersion;
+	OCLS::COfficeInfo getVersion;
 	map<OCLS::U_OFFICE_TYPE, string> mp;
 	bool ret = getVersion.GetLocalOfficeVersion(mp);
 	cout << "程序类型枚举值说明：" << endl << endl;

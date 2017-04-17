@@ -1,4 +1,4 @@
-#include "GetOfficeInfo.h"
+#include "OfficeInfo.h"
 #include <io.h>
 #include "winSystem/WinSystem.h"
 #include "RegistryKey/RegistryKey.h"
@@ -19,11 +19,11 @@ static LPCSTR suffix[] = { ".dps", ".wps", ".et", ".doc", ".docx", ".xls", ".xls
 namespace OCLS
 {
 
-CGetOfficeInfo::CGetOfficeInfo()
+COfficeInfo::COfficeInfo()
 {
 }
 
-CGetOfficeInfo::~CGetOfficeInfo()
+COfficeInfo::~COfficeInfo()
 {
 }
 
@@ -47,7 +47,7 @@ bool GetRegItemSTR(CRegistryKey regKey, const LPCTSTR& subKey, const string& ite
     return retCode;
 }
 
-bool CGetOfficeInfo::SearchRegedit(CRegistryKey regKey, REGSAM regSam)
+bool COfficeInfo::SearchRegedit(CRegistryKey regKey, REGSAM regSam)
 {
     bool ret = true;
     for (CRegistryKey::SubkeyIterator it = regKey.BeginSubkeyIteration(); it != regKey.EndSubkeyIteration(); ++it)
@@ -93,7 +93,7 @@ bool CGetOfficeInfo::SearchRegedit(CRegistryKey regKey, REGSAM regSam)
     return ret;
 }
 
-bool CGetOfficeInfo::GetSoftwareInfoForPlatform(bool is64Platform)
+bool COfficeInfo::GetSoftwareInfoForPlatform(bool is64Platform)
 {
     bool ret = true;
     try
@@ -125,7 +125,7 @@ bool CGetOfficeInfo::GetSoftwareInfoForPlatform(bool is64Platform)
     return ret;
 }
 
-bool CGetOfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
+bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
 {
     bool ret = true;
     vector<U_SOFT_INFO>::iterator iter;
@@ -463,7 +463,7 @@ bool CGetOfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
     return ret;
 }
 
-bool CGetOfficeInfo::GetLocalOfficeVersion(map<U_OFFICE_TYPE, string>& officeVersion)
+bool COfficeInfo::GetLocalOfficeVersion(map<U_OFFICE_TYPE, string>& officeVersion)
 {
     bool ret = true;
     mSoftwareInfo.clear();
@@ -487,7 +487,7 @@ bool CGetOfficeInfo::GetLocalOfficeVersion(map<U_OFFICE_TYPE, string>& officeVer
     return ret;
 }
 
-bool CGetOfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
+bool COfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
 {
     bool ret = true;
     map<U_OFFICE_TYPE, string> officeV;

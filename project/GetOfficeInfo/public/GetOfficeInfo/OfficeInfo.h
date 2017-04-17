@@ -1,5 +1,5 @@
-#ifndef _OCLS_GETLOCALMACHINEOFFICEVERSION_H
-#define _OCLS_GETLOCALMACHINEOFFICEVERSION_H
+#ifndef _OCLS_OFFICEINFO_H_
+#define _OCLS_OFFICEINFO_H_
 #include "Export.h"
 #include <map>
 #include <vector>
@@ -55,11 +55,11 @@ typedef struct _U_SOFT_INFO_
     string installLocation;
 }U_SOFT_INFO;
 class CRegistryKey;
-class OCLS_GETOFFICEINFO_API CGetOfficeInfo
+class OCLS_GETOFFICEINFO_API COfficeInfo
 {
 public:
-    CGetOfficeInfo();
-    ~CGetOfficeInfo();
+    COfficeInfo();
+    ~COfficeInfo();
 
     /**
     * 获取本机安装的WPS office、Microsoft office类型及版本号
