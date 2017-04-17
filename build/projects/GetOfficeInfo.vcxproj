@@ -11,27 +11,28 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\project\GetLocalMachineOfficeVersion\include\CountedRegKey.h" />
-    <ClInclude Include="..\..\project\GetLocalMachineOfficeVersion\include\ExpandableBuffer.h" />
-    <ClInclude Include="..\..\project\GetLocalMachineOfficeVersion\include\ReferenceCounted.h" />
-    <ClInclude Include="..\..\project\GetLocalMachineOfficeVersion\include\RegistryKey.h" />
-    <ClInclude Include="..\..\project\GetLocalMachineOfficeVersion\include\RegKeyIterator.h" />
-    <ClInclude Include="..\..\project\GetLocalMachineOfficeVersion\include\Utils.h" />
-    <ClInclude Include="..\..\project\GetLocalMachineOfficeVersion\include\Win32Exception.h" />
-    <ClInclude Include="..\..\project\GetLocalMachineOfficeVersion\public\GetLocalMachineOfficeVersion\Export.h" />
-    <ClInclude Include="..\..\project\GetLocalMachineOfficeVersion\public\GetLocalMachineOfficeVersion\GetLocalMachineOfficeVersion.h" />
+    <ClInclude Include="..\..\project\GetOfficeInfo\include\CountedRegKey.h" />
+    <ClInclude Include="..\..\project\GetOfficeInfo\include\ExpandableBuffer.h" />
+    <ClInclude Include="..\..\project\GetOfficeInfo\include\ReferenceCounted.h" />
+    <ClInclude Include="..\..\project\GetOfficeInfo\include\RegistryKey.h" />
+    <ClInclude Include="..\..\project\GetOfficeInfo\include\RegKeyIterator.h" />
+    <ClInclude Include="..\..\project\GetOfficeInfo\include\Utils.h" />
+    <ClInclude Include="..\..\project\GetOfficeInfo\include\Win32Exception.h" />
+    <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\Export.h" />
+    <ClInclude Include="..\..\project\GetOfficeInfo\public\GetOfficeInfo\GetOfficeInfo.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\project\GetLocalMachineOfficeVersion\source\dllsrc\DllMain.cpp" />
-    <ClCompile Include="..\..\project\GetLocalMachineOfficeVersion\source\libsrc\GetLocalMachineOfficeVersion.cpp" />
-    <ClCompile Include="..\..\project\GetLocalMachineOfficeVersion\source\libsrc\RegistryKey.cpp" />
-    <ClCompile Include="..\..\project\GetLocalMachineOfficeVersion\source\libsrc\RegKeyIterator.cpp" />
-    <ClCompile Include="..\..\project\GetLocalMachineOfficeVersion\source\libsrc\Utils.cpp" />
-    <ClCompile Include="..\..\project\GetLocalMachineOfficeVersion\source\libsrc\Win32Exception.cpp" />
+    <ClCompile Include="..\..\project\GetOfficeInfo\source\dllsrc\DllMain.cpp" />
+    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\GetOfficeInfo.cpp" />
+    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\RegistryKey.cpp" />
+    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\RegKeyIterator.cpp" />
+    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\Utils.cpp" />
+    <ClCompile Include="..\..\project\GetOfficeInfo\source\libsrc\Win32Exception.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2D088CD8-8C70-4059-ACEA-E59B3B6ADDFE}</ProjectGuid>
     <RootNamespace>GetLocalMachineOfficeVersion</RootNamespace>
+    <ProjectName>GetOfficeInfo</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -68,8 +69,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../project/GetLocalMachineOfficeVersion/public/GetLocalMachineOfficeVersion;../../project/GetLocalMachineOfficeVersion/include;../../project/GetLocalMachineOfficeVersion/source/libsrc;../../project/GetLocalMachineOfficeVersion/source/dllsrc;../../.xpm/depends/public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINDLL;_DEBUG;_USRDLL;GETLOCALMACHINEOFFICEVERSION_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../project/GetOfficeInfo/public/GetOfficeInfo;../../project/GetOfficeInfo/include;../../project/GetOfficeInfo/source/libsrc;../../project/GetOfficeInfo/source/dllsrc;../../.xpm/depends/public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDLL;_DEBUG;_USRDLL;MAKINGDLL_GETOFFICEINFO;USINGDLL_GETOFFICEINFO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -79,7 +80,7 @@
       <ManifestFile>$(IntDir)$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
       <ProfileGuidedDatabase>$(OutDir)$(TargetName).pgd</ProfileGuidedDatabase>
-      <AdditionalDependencies>Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Shlwapi.lib;win_systemd.lib;osald.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -89,15 +90,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GETLOCALMACHINEOFFICEVERSION_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../project/GetLocalMachineOfficeVersion/public/GetLocalMachineOfficeVersion;../../project/GetLocalMachineOfficeVersion/include;../../project/GetLocalMachineOfficeVersion/source/libsrc;../../project/GetLocalMachineOfficeVersion/source/dllsrc;../../.xpm/depends/public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MAKINGDLL_GETOFFICEINFO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../project/GetOfficeInfo/public/GetOfficeInfo;../../project/GetOfficeInfo/include;../../project/GetOfficeInfo/source/libsrc;../../project/GetOfficeInfo/source/dllsrc;../../.xpm/depends/public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>../../.xpm/depends/dist;../../dist;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shlwapi.lib;win_system.lib;osal.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

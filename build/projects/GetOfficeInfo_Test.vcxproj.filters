@@ -15,21 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\project\win_system\public\winSystem\WinSystem.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\project\win_system\public\winSystem\Export.h">
+    <ClInclude Include="..\..\project\GetOfficeInfo_test\include\test.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\project\win_system\source\libsrc\WinSystem.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\project\win_system\source\dllsrc\dllmain.cpp">
+    <ClCompile Include="..\..\project\GetOfficeInfo_test\source\test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

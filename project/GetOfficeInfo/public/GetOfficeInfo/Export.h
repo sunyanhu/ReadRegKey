@@ -1,0 +1,11 @@
+#ifndef _OCLS_EXPORT_H_
+#define _OCLS_EXPORT_H_
+#include <osal/Osal.h>
+#if defined(MAKINGDLL_GETOFFICEINFO)
+#define OCLS_GETOFFICEINFO_API OSALEXPORT
+#elif defined(USINGDLL_GETOFFICEINFO)
+#define OCLS_GETOFFICEINFO_API OSALIMPORT
+#else
+#define OCLS_GETOFFICEINFO_API
+#endif
+#endif

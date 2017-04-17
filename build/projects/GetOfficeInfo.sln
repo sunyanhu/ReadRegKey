@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GetLocalMachineOfficeVersion", "GetLocalMachineOfficeVersion.vcxproj", "{2D088CD8-8C70-4059-ACEA-E59B3B6ADDFE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GetOfficeInfo", "GetOfficeInfo.vcxproj", "{2D088CD8-8C70-4059-ACEA-E59B3B6ADDFE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "win_system", "win_system.vcxproj", "{A9EDF17F-140F-4676-BC18-0F3F4F7B3D75}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GetLocalMachineOfficeVersion_Test", "GetLocalMachineOfficeVersion_Test.vcxproj", "{AD5B6B0A-CA7C-438E-AA60-E0067A55ED99}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GetOfficeInfo_Test", "GetOfficeInfo_Test.vcxproj", "{AD5B6B0A-CA7C-438E-AA60-E0067A55ED99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{2D088CD8-8C70-4059-ACEA-E59B3B6ADDFE}.Debug|Win32.Build.0 = Debug|Win32
 		{2D088CD8-8C70-4059-ACEA-E59B3B6ADDFE}.Release|Win32.ActiveCfg = Release|Win32
 		{2D088CD8-8C70-4059-ACEA-E59B3B6ADDFE}.Release|Win32.Build.0 = Release|Win32
-		{A9EDF17F-140F-4676-BC18-0F3F4F7B3D75}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A9EDF17F-140F-4676-BC18-0F3F4F7B3D75}.Debug|Win32.Build.0 = Debug|Win32
-		{A9EDF17F-140F-4676-BC18-0F3F4F7B3D75}.Release|Win32.ActiveCfg = Release|Win32
-		{A9EDF17F-140F-4676-BC18-0F3F4F7B3D75}.Release|Win32.Build.0 = Release|Win32
 		{AD5B6B0A-CA7C-438E-AA60-E0067A55ED99}.Debug|Win32.ActiveCfg = Debug|Win32
 		{AD5B6B0A-CA7C-438E-AA60-E0067A55ED99}.Debug|Win32.Build.0 = Debug|Win32
 		{AD5B6B0A-CA7C-438E-AA60-E0067A55ED99}.Release|Win32.ActiveCfg = Release|Win32
