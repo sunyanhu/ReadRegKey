@@ -41,7 +41,7 @@ int main(void)
 	wcout << 28<< L"：WPS_OFFICE_2016_WPS" << endl;
 	wcout << 29<< L"：WPS_OFFICE_2016_ET" << endl;
 	wcout << 30 << L"：WPS_OFFICE_2016_DPS" << endl << endl;
-	wcout << "本机安装的office版本：" << endl << endl;
+	wcout << L"本机安装的office版本：" << endl << endl;
 	for (map<OCLS::U_OFFICE_TYPE, wstring>::iterator it = mp.begin(); it != mp.end(); it++)
 	{
 		wcout << L"类型：" << it->first << L",   安装版本号：" << it->second.data() << endl;
