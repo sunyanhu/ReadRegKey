@@ -3,6 +3,7 @@
 #include "winSystem/WinSystem.h"
 #include "RegistryKey/RegistryKey.h"
 #include "RegistryKey/RegKeyIterator.h"
+#include "osal/StringUtil.h"
 #include <algorithm>
 #include <Shlwapi.h>
 #include <ShlGuid.h>
@@ -126,7 +127,7 @@ bool COfficeInfo::GetSoftwareInfoForPlatform(bool is64Platform)
     return ret;
 }
 
-bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
+bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, wstring> &officeVersion)
 {
     bool ret = true;
     vector<U_SOFT_INFO>::iterator iter;
@@ -157,21 +158,21 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
                        string wordexe = exe + U_WINWORD_EXE;
                        if (_access(wordexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2003_WORD, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2003_WORD, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(wordexe.c_str(), iter->displayVersion));
                        }
 
                        string excelexe = exe + U_EXCLE_EXE;
                        if (_access(excelexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2003_EXCEL, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2003_EXCEL, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(excelexe.c_str(), iter->displayVersion));
                        }
 
                        string powerpntexe = exe + U_POWERPNT_EXE;
                        if (_access(powerpntexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2003_PPT, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2003_PPT, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(powerpntexe.c_str(), iter->displayVersion));
                        }
             }
@@ -193,21 +194,21 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
                        string wordexe = exe + U_WINWORD_EXE;
                        if (_access(wordexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2007_WORD, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2007_WORD, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(wordexe.c_str(), iter->displayVersion));
                        }
 
                        string excelexe = exe + U_EXCLE_EXE;
                        if (_access(excelexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2007_EXCEL, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2007_EXCEL, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(excelexe.c_str(), iter->displayVersion));
                        }
 
                        string powerpntexe = exe + U_POWERPNT_EXE;
                        if (_access(powerpntexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2007_PPT, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2007_PPT, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(powerpntexe.c_str(), iter->displayVersion));
                        }
             }
@@ -229,21 +230,21 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
                        string wordexe = exe + U_WINWORD_EXE;
                        if (_access(wordexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2010_WORD, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2010_WORD, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(wordexe.c_str(), iter->displayVersion));
                        }
 
                        string excelexe = exe + U_EXCLE_EXE;
                        if (_access(excelexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2010_EXCEL, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2010_EXCEL, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(excelexe.c_str(), iter->displayVersion));
                        }
 
                        string powerpntexe = exe + U_POWERPNT_EXE;
                        if (_access(powerpntexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2010_PPT, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2010_PPT, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(powerpntexe.c_str(), iter->displayVersion));
                        }
             }
@@ -265,21 +266,21 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
                        string wordexe = exe + U_WINWORD_EXE;
                        if (_access(wordexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2013_WORD, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2013_WORD, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(wordexe.c_str(), iter->displayVersion));
                        }
 
                        string excelexe = exe + U_EXCLE_EXE;
                        if (_access(excelexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2013_EXCEL, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2013_EXCEL, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(excelexe.c_str(), iter->displayVersion));
                        }
 
                        string powerpntexe = exe + U_POWERPNT_EXE;
                        if (_access(powerpntexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2013_PPT, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2013_PPT, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(powerpntexe.c_str(), iter->displayVersion));
                        }
             }
@@ -301,21 +302,21 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
                        string wordexe = exe + U_WINWORD_EXE;
                        if (_access(wordexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2016_WORD, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2016_WORD, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(wordexe.c_str(), iter->displayVersion));
                        }
 
                        string excelexe = exe + U_EXCLE_EXE;
                        if (_access(excelexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2016_EXCEL, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2016_EXCEL, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(excelexe.c_str(), iter->displayVersion));
                        }
 
                        string powerpntexe = exe + U_POWERPNT_EXE;
                        if (_access(powerpntexe.c_str(), 0) != -1)
                        {
-                           officeVersion.insert(pair<U_OFFICE_TYPE, string>(MS_OFFICE_2016_PPT, iter->displayVersion));
+                           officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(MS_OFFICE_2016_PPT, StringUtil::ansiToUtf16(iter->displayVersion)));
                            m_InstallInfo.insert(pair <string, string>(powerpntexe.c_str(), iter->displayVersion));
                        }
             }
@@ -345,21 +346,21 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
                 string wordexe = exe + U_WPS_EXE;
                 if (_access(wordexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2009_WPS, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2009_WPS, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(wordexe.c_str(), iter->displayVersion));
                 }
 
                 string excelexe = exe + U_ET_EXE;
                 if (_access(excelexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2009_ET, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2009_ET, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(excelexe.c_str(), iter->displayVersion));
                 }
 
                 string powerpntexe = exe + U_WPP_EXE;
                 if (_access(powerpntexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2009_DPS, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2009_DPS, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(powerpntexe.c_str(), iter->displayVersion));
                 }
             }
@@ -369,21 +370,21 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
                 string wordexe = exe + U_WPS_EXE;
                 if (_access(wordexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2010_WPS, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2010_WPS, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(wordexe.c_str(), iter->displayVersion));
                 }
 
                 string excelexe = exe + U_ET_EXE;
                 if (_access(excelexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2010_ET, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2010_ET, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(excelexe.c_str(), iter->displayVersion));
                 }
 
                 string powerpntexe = exe + U_WPP_EXE;
                 if (_access(powerpntexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2010_DPS, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2010_DPS, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(powerpntexe.c_str(), iter->displayVersion));
                 }
             }
@@ -393,21 +394,21 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
                 string wordexe = exe + U_WPS_EXE;
                 if (_access(wordexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2012_WPS, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2012_WPS, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(wordexe.c_str(), iter->displayVersion));
                 }
 
                 string excelexe = exe + U_ET_EXE;
                 if (_access(excelexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2012_ET, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2012_ET, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(excelexe.c_str(), iter->displayVersion));
                 }
 
                 string powerpntexe = exe + U_WPP_EXE;
                 if (_access(powerpntexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2012_DPS, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2012_DPS, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(powerpntexe.c_str(), iter->displayVersion));
                 }
             }
@@ -417,21 +418,21 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
                 string wordexe = exe + U_WPS_EXE;
                 if (_access(wordexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2013_WPS, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2013_WPS, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(wordexe.c_str(), iter->displayVersion));
                 }
 
                 string excelexe = exe + U_ET_EXE;
                 if (_access(excelexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2013_ET, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2013_ET, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(excelexe.c_str(), iter->displayVersion));
                 }
 
                 string powerpntexe = exe + U_WPP_EXE;
                 if (_access(powerpntexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2013_DPS, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2013_DPS, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(powerpntexe.c_str(), iter->displayVersion));
                 }
             }
@@ -441,21 +442,21 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
                 string wordexe = exe + U_WPS_EXE;
                 if (_access(wordexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2016_WPS, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2016_WPS, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(wordexe.c_str(), iter->displayVersion));
                 }
 
                 string excelexe = exe + U_ET_EXE;
                 if (_access(excelexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2016_ET, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2016_ET, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(excelexe.c_str(), iter->displayVersion));
                 }
 
                 string powerpntexe = exe + U_WPP_EXE;
                 if (_access(powerpntexe.c_str(), 0) != -1)
                 {
-                    officeVersion.insert(pair<U_OFFICE_TYPE, string>(WPS_OFFICE_2016_DPS, iter->displayVersion));
+                    officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(WPS_OFFICE_2016_DPS, StringUtil::ansiToUtf16(iter->displayVersion)));
                     m_InstallInfo.insert(pair <string, string>(powerpntexe.c_str(), iter->displayVersion));
                 }
             }
@@ -464,7 +465,7 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
     return ret;
 }
 
-bool COfficeInfo::GetLocalOfficeVersion(map<U_OFFICE_TYPE, string>& officeVersion)
+bool COfficeInfo::GetLocalOfficeVersion(map<U_OFFICE_TYPE, wstring>& officeVersion)
 {
     bool ret = true;
     mSoftwareInfo.clear();
@@ -480,7 +481,7 @@ bool COfficeInfo::GetLocalOfficeVersion(map<U_OFFICE_TYPE, string>& officeVersio
 
     if (mSoftwareInfo.empty())
     {
-        officeVersion.insert(pair<U_OFFICE_TYPE, string>(OFFICEAPP_UNINSTALL, "未检测到Microsoft Office或WPS办公软件"));
+        officeVersion.insert(pair<U_OFFICE_TYPE, wstring>(OFFICEAPP_UNINSTALL, L"未检测到Microsoft Office或WPS办公软件"));
         ret = false;
     }
 
@@ -488,10 +489,10 @@ bool COfficeInfo::GetLocalOfficeVersion(map<U_OFFICE_TYPE, string>& officeVersio
     return ret;
 }
 
-bool COfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
+bool COfficeInfo::GetDefaultOpenMode(map<wstring, U_OFFICE_TYPE>& defaultOpenApp)
 {
     bool ret = true;
-    map<U_OFFICE_TYPE, string> officeV;
+    map<U_OFFICE_TYPE, wstring> officeV;
     GetLocalOfficeVersion(officeV);
     IQueryAssociations *pAssoc;
     HRESULT hr = AssocCreate(CLSID_QueryAssociations, IID_PPV_ARGS(&pAssoc));
@@ -540,15 +541,15 @@ bool COfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
                         {
                             if (exePath.find(U_WPS_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2009_WPS));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2009_WPS));
                             }
                             else if (exePath.find(U_ET_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2009_ET));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2009_ET));
                             }
                             else if (exePath.find(U_WPP_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2009_DPS));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2009_DPS));
                             }
 
                         }
@@ -556,15 +557,15 @@ bool COfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
                         {
                             if (exePath.find(U_WPS_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2010_WPS));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2010_WPS));
                             }
                             else if (exePath.find(U_ET_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2010_ET));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2010_ET));
                             }
                             else if (exePath.find(U_WPP_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2010_DPS));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2010_DPS));
                             }
                         }
 
@@ -572,45 +573,45 @@ bool COfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
                         {
                             if (exePath.find(U_WPS_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2012_WPS));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2012_WPS));
                             }
                             else if (exePath.find(U_ET_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2012_ET));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2012_ET));
                             }
                             else if (exePath.find(U_WPP_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2012_DPS));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2012_DPS));
                             }
                         }
                         else if (hMS == 9)
                         {
                             if (exePath.find(U_WPS_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2013_WPS));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2013_WPS));
                             }
                             else if (exePath.find(U_ET_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2013_ET));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2013_ET));
                             }
                             else if (exePath.find(U_WPP_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2013_DPS));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2013_DPS));
                             }
                         }
                         else if (hMS == 10)
                         {
                             if (exePath.find(U_WPS_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2016_WPS));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2016_WPS));
                             }
                             else if (exePath.find(U_ET_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2016_ET));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2016_ET));
                             }
                             else if (exePath.find(U_WPP_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, WPS_OFFICE_2016_DPS));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), WPS_OFFICE_2016_DPS));
                             }
                         }
                     }
@@ -622,15 +623,15 @@ bool COfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
                         {
                             if (exePath.find(U_WINWORD_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2003_WORD));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2003_WORD));
                             }
                             else if (exePath.find(U_EXCLE_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2003_EXCEL));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2003_EXCEL));
                             }
                             else if (exePath.find(U_POWERPNT_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2003_PPT));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2003_PPT));
                             }
                         }
                         break;
@@ -638,15 +639,15 @@ bool COfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
                         {
                             if (exePath.find(U_WINWORD_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2007_WORD));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2007_WORD));
                             }
-                                   else if (exePath.find(U_EXCLE_EXE) != -1)
+                            else if (exePath.find(U_EXCLE_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2007_EXCEL));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2007_EXCEL));
                             }
                             else if (exePath.find(U_POWERPNT_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2007_PPT));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2007_PPT));
                             }
                         }
                         break;
@@ -654,15 +655,15 @@ bool COfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
                         {
                             if (exePath.find(U_WINWORD_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2010_WORD));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2010_WORD));
                             }
-                                   else if (exePath.find(U_EXCLE_EXE) != -1)
+                            else if (exePath.find(U_EXCLE_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2010_EXCEL));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2010_EXCEL));
                             }
                             else if (exePath.find(U_POWERPNT_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2010_PPT));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2010_PPT));
                             }
                         }
                         break;
@@ -670,15 +671,15 @@ bool COfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
                         {
                             if (exePath.find(U_WINWORD_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2013_WORD));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2013_WORD));
                             }
                             else if (exePath.find(U_EXCLE_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2013_EXCEL));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2013_EXCEL));
                             }
                             else if (exePath.find(U_POWERPNT_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2013_PPT));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2013_PPT));
                             }
                         }
                         break;
@@ -686,15 +687,15 @@ bool COfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
                         {
                             if (exePath.find(U_WINWORD_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2016_WORD));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2016_WORD));
                             }
                             else if (exePath.find(U_EXCLE_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2016_EXCEL));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2016_EXCEL));
                             }
                             else if (exePath.find(U_POWERPNT_EXE) != -1)
                             {
-                                defaultOpenApp.insert(pair<string, U_OFFICE_TYPE>(ext, MS_OFFICE_2016_PPT));
+                                defaultOpenApp.insert(pair<wstring, U_OFFICE_TYPE>(StringUtil::ansiToUtf16(ext), MS_OFFICE_2016_PPT));
                             }
                         }
                         break;

@@ -68,7 +68,7 @@ public:
     *                   true  获取office信息成功
     * @todo                   暂没实现
     */
-    bool GetLocalOfficeVersion(map<U_OFFICE_TYPE, string>& officeVersion);
+    bool GetLocalOfficeVersion(map<U_OFFICE_TYPE, wstring>& officeVersion);
 
     /**
     * 获取本机后缀名为*.dps;*.wps;*.et;*.doc;*.docx;*.xls;*.xlsx;*.ppt;*.pptx;类型文件默认打开方式
@@ -77,7 +77,7 @@ public:
     *                   true  获取默认打开程序成功
     * @todo                   暂没实现
     */
-    bool GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp);
+    bool GetDefaultOpenMode(map<wstring, U_OFFICE_TYPE>& defaultOpenApp);
 
 private:
     //保存软件安装信息
@@ -88,7 +88,7 @@ private:
 protected:
     bool SearchRegedit(CRegistryKey regKey, REGSAM regSam);
     bool GetSoftwareInfoForPlatform(bool is64Platform);
-    bool SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion);
+    bool SetOfficeVersion(map<U_OFFICE_TYPE, wstring> &officeVersion);
 };
 }
 #endif
