@@ -1,7 +1,8 @@
-#include "OfficeInfo.h"
+#include "GetOfficeInfo\OfficeInfo.h"
 #include <io.h>
 #include "winSystem/WinSystem.h"
 #include "RegistryKey/RegistryKey.h"
+#include "RegistryKey/RegKeyIterator.h"
 #include <algorithm>
 #include <Shlwapi.h>
 #include <ShlGuid.h>
@@ -27,16 +28,16 @@ COfficeInfo::~COfficeInfo()
 {
 }
 
-bool GetRegItemSTR(CRegistryKey regKey, const LPCTSTR& subKey, const string& itemKey, string &itemValue, REGSAM regSam)
+bool GetRegItemSTR(CRegistryKey regKey, const LPCSTR& subKey, const string& itemKey, string &itemValue, REGSAM regSam)
 {
     bool retCode = false;
     try
     {
         CRegistryKey regSubKey = regKey.OpenKey(subKey, regSam);
-        CRegistryValue regValue = regSubKey.QueryValue((LPCTSTR)itemKey.c_str());
+        CRegistryValue regValue = regSubKey.QueryValue((LPCSTR)itemKey.c_str());
         if (regValue.m_bufSize != 0)
         {
-            itemValue.assign((LPCTSTR)regValue);
+            itemValue.assign((LPCSTR)regValue);
             retCode = true;
         }
     }
@@ -52,7 +53,7 @@ bool COfficeInfo::SearchRegedit(CRegistryKey regKey, REGSAM regSam)
     bool ret = true;
     for (CRegistryKey::SubkeyIterator it = regKey.BeginSubkeyIteration(); it != regKey.EndSubkeyIteration(); ++it)
     {
-        LPCTSTR subKey;
+        LPCSTR subKey;
         subKey = it.GetName();
 
         string displayName = "";
@@ -137,7 +138,7 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
             int inps = version.find_first_of(".");
             version = version.substr(0, inps);
 
-            switch (_ttoi(version.c_str()))
+            switch (atoi(version.c_str()))
             {
             case 11:
             {
@@ -324,7 +325,7 @@ bool COfficeInfo::SetOfficeVersion(map<U_OFFICE_TYPE, string> &officeVersion)
             }
         }
 
-        if (iter->displayName.find(_T("WPS Office")) != -1)
+        if (iter->displayName.find("WPS Office") != -1)
         {
             string version = iter->displayVersion;
             string exe = "";
@@ -496,7 +497,7 @@ bool COfficeInfo::GetDefaultOpenMode(map<string, U_OFFICE_TYPE>& defaultOpenApp)
     HRESULT hr = AssocCreate(CLSID_QueryAssociations, IID_PPV_ARGS(&pAssoc));
     if (SUCCEEDED(hr))
     {
-        TCHAR buffer[MAX_PATH] = { 0 };
+        char buffer[MAX_PATH] = { 0 };
         for (LPCSTR ext : suffix)
         {
             hr = pAssoc->Init(ASSOCF_INIT_DEFAULTTOSTAR, StringUtil::ansiToUtf16(ext).c_str(), nullptr, nullptr);

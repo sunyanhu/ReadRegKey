@@ -3,7 +3,7 @@
 namespace OCLS
 {
 CLSException::CLSException(
-	const LPCTSTR pWhere,
+    const LPCSTR pWhere,
 	DWORD error)
 	: m_pWhere(pWhere),
 	m_error(error)
@@ -21,19 +21,19 @@ DWORD CLSException::GetError() const
 	return m_error;
 }
 
-LPCTSTR CLSException::GetWhere() const
+LPCSTR CLSException::GetWhere() const
 {
 	// Wrap the message with the file and line?
 	return m_pWhere;
 }
 
-LPCTSTR CLSException::GetMessage() const
+LPCSTR CLSException::GetMessage() const
 {
 	return GetLastErrorMessage(m_error);
 }
 
 void CLSException::MessageBox(HWND hWnd /* = NULL */) const
 {
-	::MessageBox(hWnd, GetMessage(), m_pWhere, MB_ICONSTOP);
+	::MessageBoxA(hWnd, GetMessage(), m_pWhere, MB_ICONSTOP);
 }
 }

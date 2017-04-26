@@ -12,17 +12,17 @@ CRegistryKey::CRegistryKey(
 }
 
 CRegistryKey::CRegistryKey(
-	LPTSTR pRemoteMachine,
+    LPSTR pRemoteMachine,
 	HKEY hKey)
 	: m_pKey(0)
 {
 	HKEY theKey = hKey;
 
-	LONG result = RegConnectRegistry(pRemoteMachine, hKey, &theKey);
+	LONG result = RegConnectRegistryA(pRemoteMachine, hKey, &theKey);
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::CRegistryKey() - RegConnectRegistry"), result);
+		throw CLSException("CRegistryKey::CRegistryKey() - RegConnectRegistry", result);
 	}
 
 	m_pKey = NewCountedKey(theKey, true);
@@ -31,29 +31,29 @@ CRegistryKey::CRegistryKey(
 
 CRegistryKey::CRegistryKey(
 	HKEY hKey,
-	LPCTSTR pSubKey,
+    LPCSTR pSubKey,
 	REGSAM samDesired /* = KEY_ALL_ACCESS */,
-	LPTSTR pRemoteMachine /* = 0 */)
+    LPSTR pRemoteMachine /* = 0 */)
 	: m_pKey(0)
 {
 	HKEY theKey = hKey;
 
 	if (pRemoteMachine)
 	{
-		LONG result = RegConnectRegistry(pRemoteMachine, hKey, &theKey);
+		LONG result = RegConnectRegistryA(pRemoteMachine, hKey, &theKey);
 
 		if (ERROR_SUCCESS != result)
 		{
-			throw CLSException(_T("CRegistryKey::CRegistryKey() - RegConnectRegistry"), result);
+			throw CLSException("CRegistryKey::CRegistryKey() - RegConnectRegistry", result);
 		}
 	}
 
 	HKEY newKey;
-	LONG result = RegOpenKeyEx(theKey, pSubKey, 0, samDesired, &newKey);
+	LONG result = RegOpenKeyExA(theKey, pSubKey, 0, samDesired, &newKey);
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::CRegistryKey(HKEY hKey ...)"), result);
+		throw CLSException("CRegistryKey::CRegistryKey(HKEY hKey ...)", result);
 	}
 
 	m_pKey = NewCountedKey(newKey, true);
@@ -127,7 +127,7 @@ CRegistryKeyCounted *CRegistryKey::NewCountedKey(
 			RegCloseKey(hKey);
 		}
 
-		throw CLSException(_T("CRegistryKey::NewCRegistryKeyCounted()"),ERROR_NOT_ENOUGH_MEMORY);
+		throw CLSException("CRegistryKey::NewCRegistryKeyCounted()",ERROR_NOT_ENOUGH_MEMORY);
 	}
 
 	return pCRegistryKeyCounted;
@@ -138,14 +138,14 @@ CRegistryKeyCounted *CRegistryKey::NewCountedKey(
 ///////////////////////////////////////////////////////////////////////////////
 
 CRegistryKey CRegistryKey::OpenKey(
-	LPCTSTR pSubKey,
+    LPCSTR pSubKey,
 	REGSAM samDesired /* = KEY_ALL_ACCESS */) const
 {
 	return CRegistryKey(*this, pSubKey, samDesired);
 }
 
 void CRegistryKey::DeleteKey(
-	LPCTSTR pKeyName) const
+    LPCSTR pKeyName) const
 {
 	// Behaviour of RegDeleteKey differs on Win95 and NT
 	// On 95 RegDeleteKey will delete keys with subkeys
@@ -161,20 +161,20 @@ void CRegistryKey::DeleteKey(
 
 		if (deadKey.BeginSubkeyIteration() != deadKey.EndSubkeyIteration())
 		{
-			throw CLSException(_T("CRegistryKey::DeleteKey()"), ERROR_ACCESS_DENIED);
+			throw CLSException("CRegistryKey::DeleteKey()", ERROR_ACCESS_DENIED);
 		}
 	}
 
-	LONG result = RegDeleteKey(m_pKey->GetCounted(), pKeyName);
+	LONG result = RegDeleteKeyA(m_pKey->GetCounted(), pKeyName);
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::DeleteKey()"), result);
+		throw CLSException("CRegistryKey::DeleteKey()", result);
 	}
 }
 
 void CRegistryKey::DeleteKeyAndSubkeys(
-	LPCTSTR pKeyName) const
+    LPCSTR pKeyName) const
 {
 	// Win95 doesn't need this as it deletes subkeys by default
 	// NT wont delete a key with subkeys...
@@ -207,8 +207,8 @@ void CRegistryKey::DeleteKeyAndSubkeys(
 }
 
 CRegistryKey CRegistryKey::CreateKey(
-	LPCTSTR pSubKey,
-	LPTSTR pClass /* = _T("") */,
+    LPCSTR pSubKey,
+    LPSTR pClass /* = "" */,
 	DWORD dwOptions /* = REG_OPTION_NON_VOLATILE */,
 	REGSAM samDesired /* = KEY_ALL_ACCESS */,
 	LPSECURITY_ATTRIBUTES pSecurityAttributes /* = NULL */) const
@@ -227,7 +227,7 @@ CRegistryKey CRegistryKey::CreateKey(
 	{
 		RegCloseKey(key);
 
-		throw CLSException(_T("CRegistryKey::CreateKey()"), ERROR_ALREADY_EXISTS);
+		throw CLSException("CRegistryKey::CreateKey()", ERROR_ALREADY_EXISTS);
 	}
 
 
@@ -235,9 +235,9 @@ CRegistryKey CRegistryKey::CreateKey(
 }
 
 CRegistryKey CRegistryKey::CreateOrOpenKey(
-	LPCTSTR pSubKey,
+    LPCSTR pSubKey,
 	DWORD *pDisposition /* = NULL */,
-	LPTSTR pClass /* = _T("") */,
+    LPSTR pClass /* = "" */,
 	DWORD dwOptions /* = REG_OPTION_NON_VOLATILE */,
 	REGSAM samDesired /* = KEY_ALL_ACCESS */,
 	LPSECURITY_ATTRIBUTES pSecurityAttributes /* = NULL */) const
@@ -251,27 +251,27 @@ CRegistryKey CRegistryKey::CreateOrOpenKey(
 		pDisposition = &disposition;
 	}
 
-	LONG result = RegCreateKeyEx(m_pKey->GetCounted(), pSubKey, 0, pClass, dwOptions,
+	LONG result = RegCreateKeyExA(m_pKey->GetCounted(), pSubKey, 0, pClass, dwOptions,
 		samDesired, pSecurityAttributes, &hKey,
 		pDisposition);
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::CreateOrOpenKey()"), result);
+		throw CLSException("CRegistryKey::CreateOrOpenKey()", result);
 	}
 
 	return CRegistryKey(hKey);
 }
 
 bool CRegistryKey::HasSubkey(
-	LPCTSTR pSubKey,
+    LPCSTR pSubKey,
 	REGSAM samDesired /* = KEY_ALL_ACCESS */) const
 {
 	bool hasKey = false;
 
 	HKEY hKey;
 
-	LONG result = RegOpenKeyEx(m_pKey->GetCounted(), pSubKey, 0, samDesired, &hKey);
+	LONG result = RegOpenKeyExA(m_pKey->GetCounted(), pSubKey, 0, samDesired, &hKey);
 
 	if (ERROR_SUCCESS == result)
 	{
@@ -288,15 +288,15 @@ bool CRegistryKey::HasSubkey(
 	return hasKey;
 }
 
-CRegistryKey CRegistryKey::ConnectRegistry(LPTSTR pMachineName) const
+CRegistryKey CRegistryKey::ConnectRegistry(LPSTR pMachineName) const
 {
 	HKEY hKey;
 
-	LONG result = RegConnectRegistry(pMachineName, m_pKey->GetCounted(), &hKey);
+	LONG result = RegConnectRegistryA(pMachineName, m_pKey->GetCounted(), &hKey);
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::ConnectRegistry()"), result);
+		throw CLSException("CRegistryKey::ConnectRegistry()", result);
 	}
 
 	return CRegistryKey(hKey);
@@ -308,7 +308,7 @@ void CRegistryKey::FlushKey() const
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::FlushKey()"), result);
+		throw CLSException("CRegistryKey::FlushKey()", result);
 	}
 }
 
@@ -317,13 +317,13 @@ CRegistryKey::operator HKEY() const
 	return m_pKey->GetCounted();
 }
 
-void CRegistryKey::DeleteValue(LPCTSTR pValueName) const
+void CRegistryKey::DeleteValue(LPCSTR pValueName) const
 {
-	LONG result = RegDeleteValue(m_pKey->GetCounted(), pValueName);
+	LONG result = RegDeleteValueA(m_pKey->GetCounted(), pValueName);
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::DeleteValue()"), result);
+		throw CLSException("CRegistryKey::DeleteValue()", result);
 	}
 }
 
@@ -358,13 +358,13 @@ CRegistryKey::ValueIterator CRegistryKey::EndValueIteration() const
 // QueryValue for other types
 // What about multiple values?
 
-CRegistryValue CRegistryKey::QueryValue(LPCTSTR pValueName /* = 0 */) const
+CRegistryValue CRegistryKey::QueryValue(LPCSTR pValueName /* = 0 */) const
 {
 	DWORD dwType;
 	LPBYTE pBuffer = 0;
 	DWORD bufSize = 0;
 
-	LONG result = RegQueryValueEx(
+	LONG result = RegQueryValueExA(
 		m_pKey->GetCounted(),
 		pValueName,
 		0,
@@ -374,7 +374,7 @@ CRegistryValue CRegistryKey::QueryValue(LPCTSTR pValueName /* = 0 */) const
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::QueryValue()"), result);
+		throw CLSException("CRegistryKey::QueryValue()", result);
 	}
 
 	// bufSize should now tell us how much space we need...
@@ -389,7 +389,7 @@ CRegistryValue CRegistryKey::QueryValue(LPCTSTR pValueName /* = 0 */) const
 		memset(pBuffer, '\0', bufSize + 1);
 	}
 
-	result = RegQueryValueEx(
+	result = RegQueryValueExA(
 		m_pKey->GetCounted(),
 		pValueName,
 		0,
@@ -401,7 +401,7 @@ CRegistryValue CRegistryKey::QueryValue(LPCTSTR pValueName /* = 0 */) const
 	{
 		free(pBuffer); //crap
 
-		throw CLSException(_T("CRegistryKey::QueryValue()"), result);
+		throw CLSException("CRegistryKey::QueryValue()", result);
 	}
 
 	//lil
@@ -417,7 +417,7 @@ void CRegistryKey::SetValue(
 	const CRegistryValue &value) const
 {
 	// Should the value store the name too?
-	LONG result = RegSetValueEx(
+	LONG result = RegSetValueExA(
 		m_pKey->GetCounted(),
 		value.m_pName,
 		0,
@@ -427,62 +427,62 @@ void CRegistryKey::SetValue(
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::SetValue()"), result);
+		throw CLSException("CRegistryKey::SetValue()", result);
 	}
 }
 
-void CRegistryKey::LoadKey(LPCTSTR pSubkeyName, LPCTSTR pFile) const
+void CRegistryKey::LoadKey(LPCSTR pSubkeyName, LPCSTR pFile) const
 {
-	LONG result = RegLoadKey(m_pKey->GetCounted(), pSubkeyName, pFile);
+	LONG result = RegLoadKeyA(m_pKey->GetCounted(), pSubkeyName, pFile);
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::LoadKey()"), result);
+		throw CLSException("CRegistryKey::LoadKey()", result);
 	}
 }
 
-void CRegistryKey::UnLoadKey(LPCTSTR pSubkeyName) const
+void CRegistryKey::UnLoadKey(LPCSTR pSubkeyName) const
 {
-	LONG result = RegUnLoadKey(m_pKey->GetCounted(), pSubkeyName);
+	LONG result = RegUnLoadKeyA(m_pKey->GetCounted(), pSubkeyName);
 
 	if (ERROR_SUCCESS == result)
 	{
-		throw CLSException(_T("CRegistryKey::UnLoadKey()"), result);
+		throw CLSException("CRegistryKey::UnLoadKey()", result);
 	}
 }
 
 void CRegistryKey::SaveKey(
-	LPCTSTR pFile,
+    LPCSTR pFile,
 	LPSECURITY_ATTRIBUTES pSecurityAttributes /* = NULL */) const
 {
-	LONG result = RegSaveKey(m_pKey->GetCounted(), pFile, pSecurityAttributes);
+	LONG result = RegSaveKeyA(m_pKey->GetCounted(), pFile, pSecurityAttributes);
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::SaveKey()"), result);
+		throw CLSException("CRegistryKey::SaveKey()", result);
 	}
 }
 
-void CRegistryKey::RestoreKey(LPCTSTR pFile, DWORD flags /* = 0 */) const
+void CRegistryKey::RestoreKey(LPCSTR pFile, DWORD flags /* = 0 */) const
 {
-	LONG result = RegRestoreKey(m_pKey->GetCounted(), pFile, flags);
+	LONG result = RegRestoreKeyA(m_pKey->GetCounted(), pFile, flags);
 
 	if (ERROR_SUCCESS == result)
 	{
-		throw CLSException(_T("CRegistryKey::RestoreKey()"), result);
+		throw CLSException("CRegistryKey::RestoreKey()", result);
 	}
 }
 
 void CRegistryKey::ReplaceKey(
-	LPCTSTR pNewFile,
-	LPCTSTR pOldFile,
-	LPCTSTR pSubkeyName /* = 0 */) const
+    LPCSTR pNewFile,
+    LPCSTR pOldFile,
+    LPCSTR pSubkeyName /* = 0 */) const
 {
-	LONG result = RegReplaceKey(m_pKey->GetCounted(), pSubkeyName, pNewFile, pOldFile);
+	LONG result = RegReplaceKeyA(m_pKey->GetCounted(), pSubkeyName, pNewFile, pOldFile);
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::ReplaceKey()"), result);
+		throw CLSException("CRegistryKey::ReplaceKey()", result);
 	}
 }
 
@@ -510,7 +510,7 @@ PSECURITY_DESCRIPTOR CRegistryKey::GetKeySecurity(
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::GetKeySecurity()"), result);
+		throw CLSException("CRegistryKey::GetKeySecurity()", result);
 	}
 
 	return descriptor.ReleaseBuffer();
@@ -527,7 +527,7 @@ void CRegistryKey::SetKeySecurity(
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::SetKeySecurity()"), result);
+		throw CLSException("CRegistryKey::SetKeySecurity()", result);
 	}
 }
 
@@ -544,7 +544,7 @@ void CRegistryKey::NotifyChangeKeyValue(
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::RegNotifyChangeKeyValue()"), result);
+		throw CLSException("CRegistryKey::RegNotifyChangeKeyValue()", result);
 	}
 }
 
@@ -560,7 +560,7 @@ void CRegistryKey::NotifyChangeKeyValue(
 
 	if (ERROR_SUCCESS != result)
 	{
-		throw CLSException(_T("CRegistryKey::RegNotifyChangeKeyValue()"), result);
+		throw CLSException("CRegistryKey::RegNotifyChangeKeyValue()", result);
 	}
 }
 
@@ -596,7 +596,7 @@ CRegistrySubkeyIteratorImpl::CRegistrySubkeyIteratorImpl(CRegistryKeyCounted *pK
 
 		if (ERROR_SUCCESS != result)
 		{
-			throw CLSException(_T("CRegistryKey::SubkeyIterator::SubkeyIterator()"),result);
+			throw CLSException("CRegistryKey::SubkeyIterator::SubkeyIterator()",result);
 		}
 
 		// wangyongli delete            
@@ -615,12 +615,12 @@ bool CRegistrySubkeyIteratorImpl::operator==(const CRegistrySubkeyIteratorImpl &
 	return CRegKeyIterator::operator==(rhs);
 }
 
-LPCTSTR CRegistrySubkeyIteratorImpl::GetName() const
+LPCSTR CRegistrySubkeyIteratorImpl::GetName() const
 {
 	return m_Name;
 }
 
-LPCTSTR CRegistrySubkeyIteratorImpl::GetClass() const
+LPCSTR CRegistrySubkeyIteratorImpl::GetClass() const
 {
 	return m_Class;
 }
@@ -646,7 +646,7 @@ bool CRegistrySubkeyIteratorImpl::GetItem()
 		DWORD nameLen = m_Name.GetSize();
 		DWORD classLen = m_Class.GetSize();
 
-		LONG result = RegEnumKeyEx(
+		LONG result = RegEnumKeyExA(
 			m_pKey->GetCounted(),
 			m_index,
 			m_Name,
@@ -684,7 +684,7 @@ bool CRegistrySubkeyIteratorImpl::GetItem()
 
 			if (ERROR_SUCCESS != result)
 			{
-				throw CLSException(_T("CRegistryKey::SubkeyIterator::GetSubkeyInfo()"),result);
+				throw CLSException("CRegistryKey::SubkeyIterator::GetSubkeyInfo()",result);
 			}
 
 			if (0 != dwNumSubKeys)
@@ -716,7 +716,7 @@ bool CRegistrySubkeyIteratorImpl::GetItem()
 		}
 		else if (ERROR_SUCCESS != result)
 		{
-			throw CLSException(_T("CRegistryKey::SubkeyIterator::GetSubkeyInfo()"),result);
+			throw CLSException("CRegistryKey::SubkeyIterator::GetSubkeyInfo()",result);
 		}
 		else
 		{
@@ -759,7 +759,7 @@ CRegistryValueIteratorImpl::CRegistryValueIteratorImpl(CRegistryKeyCounted *pKey
 
 		if (ERROR_SUCCESS != result)
 		{
-			throw CLSException(_T("CRegistryValueIterator::ValueIterator()"), result);
+			throw CLSException("CRegistryValueIterator::ValueIterator()", result);
 		}
 
 		// wangyongli delete
@@ -782,12 +782,12 @@ bool CRegistryValueIteratorImpl::operator==(
 	return CRegKeyIterator::operator==(rhs);
 }
 
-LPCTSTR CRegistryValueIteratorImpl::GetName() const
+LPCSTR CRegistryValueIteratorImpl::GetName() const
 {
 	return m_Name;
 }
 
-LPCTSTR CRegistryValueIteratorImpl::AsString() const
+LPCSTR CRegistryValueIteratorImpl::AsString() const
 {
 	if (!m_pStringRep)
 	{
@@ -817,7 +817,7 @@ bool CRegistryValueIteratorImpl::GetItem()
 		DWORD nameLen = m_Name.GetSize();
 		m_dwBufUsed = m_Buffer.GetSize();
 
-		LONG result = RegEnumValue(
+		LONG result = RegEnumValueA(
 			m_pKey->GetCounted(),
 			m_index,
 			m_Name,
@@ -853,7 +853,7 @@ bool CRegistryValueIteratorImpl::GetItem()
 
 			if (ERROR_SUCCESS != result)
 			{
-				throw CLSException(_T("CRegistryValueIterator::GetValueInfo()"), result);
+				throw CLSException("CRegistryValueIterator::GetValueInfo()", result);
 			}
 
 			if (0 != dwNumValues)
@@ -870,7 +870,7 @@ bool CRegistryValueIteratorImpl::GetItem()
 		}
 		else if (ERROR_SUCCESS != result)
 		{
-			throw CLSException(_T("CRegistryValueIterator::GetValueInfo()"),result);
+			throw CLSException("CRegistryValueIterator::GetValueInfo()",result);
 		}
 		else
 		{
@@ -884,11 +884,11 @@ bool CRegistryValueIteratorImpl::GetItem()
 // CRegistryValue
 ///////////////////////////////////////////////////////////////////////////////
 CRegistryValue::CRegistryValue(
-	LPCTSTR pName,
+    LPCSTR pName,
 	const LPBYTE pBuffer,
 	DWORD bufSize,
 	DWORD dwType /*= REG_BINARY*/)
-	: m_pName((LPTSTR)_tcsdup(pName)),
+    : m_pName((LPSTR)_strdup(pName)),
 	m_dwType(dwType),
 	m_pBuffer((LPBYTE)duplicateBuffer(pBuffer, bufSize)),
 	m_bufSize(bufSize),
@@ -897,10 +897,10 @@ CRegistryValue::CRegistryValue(
 }
 
 CRegistryValue::CRegistryValue(
-	LPCTSTR pName,
+    LPCSTR pName,
 	vector<string> & strArray,
 	DWORD dwType /*= REG_MULTI_SZ*/)
-	: m_pName((LPTSTR)_tcsdup(pName)),
+    : m_pName((LPSTR)_strdup(pName)),
 	m_dwType(dwType),
 	m_pStringRep(0),
 	m_pBuffer(0),
@@ -922,20 +922,20 @@ CRegistryValue::CRegistryValue(
 	LPBYTE pBuffer = m_pBuffer;
 	for (size_t i = 0; i < strArray.size(); i++)
 	{
-		memcpy(pBuffer, (LPCTSTR)strArray[i].c_str(), strArray[i].length());
+        memcpy(pBuffer, (LPCSTR)strArray[i].c_str(), strArray[i].length());
 		pBuffer += strArray[i].length();
 		pBuffer += 1;
 	}
 }
 
 CRegistryValue::CRegistryValue(
-	LPCTSTR pName,
-	LPCTSTR pString,
+    LPCSTR pName,
+    LPCSTR pString,
 	DWORD dwType /*= REG_SZ */)
-	: m_pName((LPTSTR)_tcsdup(pName)),
+    : m_pName((LPSTR)_strdup(pName)),
 	m_dwType(dwType),
-	m_pBuffer((LPBYTE)_tcsdup(pString)),
-	m_bufSize((_tcslen(pString) + 1) * sizeof(TCHAR)),
+    m_pBuffer((LPBYTE)_strdup(pString)),
+	m_bufSize((strlen(pString) + 1) * sizeof(char)),
 	m_pStringRep(0)
 {
 	if (m_dwType != REG_EXPAND_SZ &&
@@ -946,10 +946,10 @@ CRegistryValue::CRegistryValue(
 }
 
 CRegistryValue::CRegistryValue(
-	LPCTSTR pName,
+    LPCSTR pName,
 	DWORD dwValue,
 	DWORD dwType /*= REG_DWORD*/)
-	: m_pName((LPTSTR)_tcsdup(pName)),
+    : m_pName((LPSTR)_strdup(pName)),
 	m_dwType(dwType),
 	m_pBuffer((unsigned char *)malloc(sizeof(DWORD))),
 	m_bufSize(sizeof(DWORD)),
@@ -966,7 +966,7 @@ CRegistryValue::CRegistryValue(
 }
 
 CRegistryValue::CRegistryValue(const CRegistryValue &rhs)
-	: m_pName(_tcsdup(rhs.m_pName)),
+    : m_pName(_strdup(rhs.m_pName)),
 	m_dwType(rhs.m_dwType),
 	m_pBuffer(rhs.duplicateBuffer()),
 	m_bufSize(rhs.m_bufSize),
@@ -1003,8 +1003,8 @@ CRegistryValue &CRegistryValue::operator=(const CRegistryValue &rhs)
 		LPBYTE pNewBuffer = rhs.duplicateBuffer();
 		LPBYTE pOldBuffer = m_pBuffer;
 
-		LPTSTR pNewName = _tcsdup(rhs.m_pName);
-		LPTSTR pOldName = m_pName;
+        LPSTR pNewName = _strdup(rhs.m_pName);
+        LPSTR pOldName = m_pName;
 
 		m_dwType = rhs.m_dwType;
 		m_bufSize = rhs.m_bufSize;
@@ -1033,7 +1033,7 @@ CRegistryValue::operator LPBYTE() const
 	return m_pBuffer;
 }
 
-CRegistryValue::operator LPCTSTR() const
+CRegistryValue::operator LPCSTR() const
 {
 	if (m_dwType != REG_EXPAND_SZ &&
 		m_dwType != REG_SZ)
@@ -1041,7 +1041,7 @@ CRegistryValue::operator LPCTSTR() const
 		throw CLSException();
 	}
 
-	return (LPCTSTR)m_pBuffer;
+    return (LPCSTR)m_pBuffer;
 }
 
 CRegistryValue::operator DWORD() const
@@ -1056,12 +1056,12 @@ CRegistryValue::operator DWORD() const
 	return *(DWORD*)m_pBuffer;
 }
 
-LPCTSTR CRegistryValue::Name() const
+LPCSTR CRegistryValue::Name() const
 {
 	return m_pName;
 }
 
-LPCTSTR CRegistryValue::AsString() const
+LPCSTR CRegistryValue::AsString() const
 {
 	if (!m_pStringRep)
 	{
@@ -1071,12 +1071,12 @@ LPCTSTR CRegistryValue::AsString() const
 	return m_pStringRep;
 }
 
-LPTSTR CRegistryValue::AsString(
+LPSTR CRegistryValue::AsString(
 	DWORD dwType,
 	const LPBYTE pBuffer,
 	DWORD bufSize)
 {
-	LPTSTR pStringRep = NULL;
+    LPSTR pStringRep = NULL;
 
 	// TODO Convert all reps to a string rep
 
@@ -1085,7 +1085,7 @@ LPTSTR CRegistryValue::AsString(
 	{
 		// Already a string!
 
-		pStringRep = _tcsdup((LPTSTR)pBuffer);
+        pStringRep = _strdup((LPSTR)pBuffer);
 	}
 	else if (dwType == REG_MULTI_SZ)
 	{
@@ -1119,12 +1119,12 @@ LPTSTR CRegistryValue::AsString(
 					if (pTemp[i] == ' ' && i)
 						pTemp[i] = ',';
 				}
-				pStringRep = _tcsdup((LPTSTR)pTemp);
+                pStringRep = _strdup((LPSTR)pTemp);
 				free(pTemp);
 			}
 		}
 		else{
-			pStringRep = _tcsdup((LPTSTR)pTemp);
+            pStringRep = _strdup((LPSTR)pTemp);
 			free(pTemp);
 		}
 	}
@@ -1156,7 +1156,7 @@ LPTSTR CRegistryValue::AsString(
 	{
 		// ×¢Òâ´óÐ¡
 		//lil
-		//pStringRep = new TCHAR[2];
+		//pStringRep = new char[2];
 		const int nDWStrLen = 30;
 		union DwordValue_un
 		{
@@ -1177,7 +1177,7 @@ LPTSTR CRegistryValue::AsString(
 	else if (dwType == REG_DWORD_LITTLE_ENDIAN ||
 		dwType == REG_DWORD_BIG_ENDIAN)
 	{
-		pStringRep = _tcsdup(_T("A number"));
+        pStringRep = _strdup("A number");
 	}
 	else
 	{
@@ -1188,19 +1188,19 @@ LPTSTR CRegistryValue::AsString(
 	return pStringRep;
 }
 
-LPTSTR CRegistryValue::bytesAsString(
+LPSTR CRegistryValue::bytesAsString(
 	const LPBYTE pBuffer,
 	DWORD bufSize)
 {
 	//lil
-	//LPTSTR pStringRep = new TCHAR[(bufSize * 2) + 1];
-	LPTSTR pStringRep = (char *)malloc((bufSize * 2) + 1);
-	LPTSTR pHere = pStringRep;
+	//LPSTR pStringRep = new char[(bufSize * 2) + 1];
+    LPSTR pStringRep = (char *)malloc((bufSize * 2) + 1);
+    LPSTR pHere = pStringRep;
 	LPBYTE pBuf = pBuffer;
 
 	for (DWORD i = 0; i < bufSize; i++)
 	{
-		_stprintf_s(pHere, (bufSize * 2) + 1, _T("%2.2x"), *pBuf);
+		sprintf_s(pHere, (bufSize * 2) + 1, "%2.2x", *pBuf);
 
 		pHere += 2;
 		pBuf++;
