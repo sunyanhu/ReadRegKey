@@ -9,9 +9,9 @@
 
 #define U_SOFTWARE_WOW6432NODE_KEY  "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall"
 #define U_SOFTWARE_SETUP_KEY  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall"
-#define U_WINWORD_EXE "WINWORD.exe"
-#define U_EXCLE_EXE "EXCEL.exe"
-#define U_POWERPNT_EXE "POWERPNT.exe"
+#define U_WINWORD_EXE "winword.exe"
+#define U_EXCLE_EXE "excel.exe"
+#define U_POWERPNT_EXE "powerpnt.exe"
 #define U_WPS_EXE "wps.exe"
 #define U_ET_EXE "et.exe"
 #define U_WPP_EXE "wpp.exe"

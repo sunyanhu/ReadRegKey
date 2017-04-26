@@ -48,7 +48,7 @@ int main(void)
 	}
 	map<string, OCLS::U_OFFICE_TYPE> defaultOpen;
 	bool re = getVersion.GetDefaultOpenMode(defaultOpen);
-	cout << endl << "根据后缀名为.doc等获取办公软件默认打开程序：" << endl << endl;
+	cout << endl << "根据后缀名获取办公软件默认打开程序：" << endl << endl;
 	for (map<string, OCLS::U_OFFICE_TYPE>::iterator it = defaultOpen.begin(); it != defaultOpen.end();it++)
 	{
 		cout << "后缀名："<< it->first.data() <<",   默认打开程序：" << it->second << endl;
