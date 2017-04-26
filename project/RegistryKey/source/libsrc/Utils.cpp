@@ -1,11 +1,11 @@
 #include "Utils.h"
 namespace OCLS
 {
-const LPTSTR GetLastErrorMessage(DWORD last_error)
+const LPSTR GetLastErrorMessage(DWORD last_error)
 {
-	static TCHAR errmsg[512];
+    static char errmsg[512];
 
-	if (!FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM,
+	if (!FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM,
 		0,
 		last_error,
 		0,

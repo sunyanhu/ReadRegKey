@@ -23,20 +23,20 @@ public:
     CLSException();
 
     CLSException(
-        const LPCTSTR pWhere,
+        const LPCSTR pWhere,
         DWORD error);
 
     DWORD GetError() const;
 
-    LPCTSTR GetWhere() const;
+    LPCSTR GetWhere() const;
 
-    virtual LPCTSTR GetMessage() const;
+    virtual LPCSTR GetMessage() const;
 
     void MessageBox(HWND hWnd = NULL) const;
 
 private:
 
-    LPCTSTR m_pWhere;
+    LPCSTR m_pWhere;
     DWORD m_error;
 };
 }

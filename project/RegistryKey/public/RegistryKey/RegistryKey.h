@@ -12,7 +12,7 @@
 using namespace std;
 namespace OCLS
 {
-typedef TExpandableBuffer<TCHAR>    TCHAR_Buffer;
+typedef TExpandableBuffer<char>    TCHAR_Buffer;
 typedef TExpandableBuffer<BYTE>     BYTE_Buffer;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -23,8 +23,8 @@ class OCLS_REGISTRYKEY_API CRegistrySubkeyIteratorImpl : public CRegKeyIterator
 public:
 
 	CRegistryKey OpenKey(REGSAM samDesired = KEY_ALL_ACCESS) const;
-	LPCTSTR GetName() const;
-	LPCTSTR GetClass() const;
+    LPCSTR GetName() const;
+    LPCSTR GetClass() const;
 
 protected:
 	CRegistrySubkeyIteratorImpl(CRegistryKeyCounted *pKey);
@@ -51,41 +51,41 @@ public:
 
 	CRegistryValue &operator=(const CRegistryValue &rhs);
 	operator LPBYTE() const;
-	operator LPCTSTR() const;
+    operator LPCSTR() const;
 	operator DWORD() const;
 
 	// other operators
-	LPCTSTR Name() const;
-	LPCTSTR AsString() const;
+    LPCSTR Name() const;
+    LPCSTR AsString() const;
 
 	CRegistryValue(
-		LPCTSTR pName,
+        LPCSTR pName,
 		const LPBYTE pBuffer,
 		DWORD bufSize,
 		DWORD dwType = REG_BINARY);
 
 	CRegistryValue(
-		LPCTSTR pName,
+        LPCSTR pName,
 		vector<string> & strArray,
 		DWORD dwType = REG_MULTI_SZ);
 
 	CRegistryValue(
-		LPCTSTR pName,
-		LPCTSTR pString,
+        LPCSTR pName,
+        LPCSTR pString,
 		DWORD dwType = REG_SZ);
 
 	CRegistryValue(
-		LPCTSTR pName,
+        LPCSTR pName,
 		DWORD dwValue,
 		DWORD dwType = REG_DWORD);
 
 private:
-	static LPTSTR AsString(
+	static LPSTR AsString(
 		DWORD dwType,
 		const LPBYTE pBuffer,
 		DWORD bufSize);
 
-	static LPTSTR bytesAsString(
+    static LPSTR bytesAsString(
 		const LPBYTE pBuffer,
 		DWORD bufSize);
 
@@ -95,11 +95,11 @@ private:
 		LPBYTE pBuffer,
 		DWORD bufSize) const;
 public:
-	LPTSTR          m_pName;
+    LPSTR          m_pName;
 	DWORD           m_dwType;
 	LPBYTE          m_pBuffer;
 	DWORD           m_bufSize;
-	mutable LPTSTR  m_pStringRep;
+    mutable LPSTR  m_pStringRep;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -108,8 +108,8 @@ public:
 class OCLS_REGISTRYKEY_API CRegistryValueIteratorImpl : public CRegKeyIterator
 {
 public:
-	LPCTSTR GetName() const;
-	LPCTSTR AsString() const;
+    LPCSTR GetName() const;
+    LPCSTR AsString() const;
 	operator CRegistryValue() const;
 
 protected:
@@ -122,7 +122,7 @@ private:
 	BYTE_Buffer m_Buffer;
 	DWORD m_dwType;
 	DWORD m_dwBufUsed;
-	mutable LPTSTR m_pStringRep;
+    mutable LPSTR m_pStringRep;
 };
 ///////////////////////////////////////////////////////////////////////////////
 // CRegistryKey
@@ -139,13 +139,13 @@ public:
 		HKEY hKey);
 
 	CRegistryKey(
-		LPTSTR pRemoteMachine,
+        LPSTR pRemoteMachine,
 		HKEY hKey);
 
 	CRegistryKey(HKEY hKey,
-		LPCTSTR pSubKey,
+        LPCSTR pSubKey,
 		REGSAM samDesired = KEY_ALL_ACCESS,
-		LPTSTR pRemoteMachine = 0);
+        LPSTR pRemoteMachine = 0);
 
 	CRegistryKey(const CRegistryKey &rhs);
 
@@ -158,33 +158,33 @@ public:
 
 	// Registry API
 
-	CRegistryKey OpenKey(LPCTSTR pSubKey,
+    CRegistryKey OpenKey(LPCSTR pSubKey,
 		REGSAM samDesired = KEY_ALL_ACCESS) const;
 
 	CRegistryKey CreateKey(
-		LPCTSTR pSubKey,
-		LPTSTR pClass = _T(""),
+        LPCSTR pSubKey,
+        LPSTR pClass = "",
 		DWORD dwOptions = REG_OPTION_NON_VOLATILE,
 		REGSAM samDesired = KEY_ALL_ACCESS,
 		LPSECURITY_ATTRIBUTES pSecurityAttributes = NULL) const;
 
 	CRegistryKey CreateOrOpenKey(
-		LPCTSTR pSubKey,
+        LPCSTR pSubKey,
 		DWORD *pDisposition = NULL,
-		LPTSTR pClass = _T(""),
+        LPSTR pClass = "",
 		DWORD dwOptions = REG_OPTION_NON_VOLATILE,
 		REGSAM samDesired = KEY_ALL_ACCESS,
 		LPSECURITY_ATTRIBUTES pSecurityAttributes = NULL) const;
 
-	void DeleteKey(LPCTSTR pKeyName) const;
+	void DeleteKey(LPCSTR pKeyName) const;
 
-	void DeleteKeyAndSubkeys(LPCTSTR pKeyName) const;
+    void DeleteKeyAndSubkeys(LPCSTR pKeyName) const;
 
 	bool HasSubkey(
-		LPCTSTR pSubkey,
+        LPCSTR pSubkey,
 		REGSAM samDesired = KEY_ALL_ACCESS) const;
 
-	CRegistryKey ConnectRegistry(LPTSTR pMachineName) const;
+    CRegistryKey ConnectRegistry(LPSTR pMachineName) const;
 
 	void FlushKey() const;
 
@@ -198,10 +198,10 @@ public:
 	// Values...
 
 	void DeleteValue(
-		LPCTSTR pValueName) const;
+        LPCSTR pValueName) const;
 
 	CRegistryValue QueryValue(
-		LPCTSTR pValueName = 0) const;
+        LPCSTR pValueName = 0) const;
 
 	void SetValue(
 		const CRegistryValue &value) const;
@@ -210,24 +210,24 @@ public:
 	ValueIterator EndValueIteration() const;
 
 	void LoadKey(
-		LPCTSTR pSubkeyName,
-		LPCTSTR pFile) const;
+        LPCSTR pSubkeyName,
+        LPCSTR pFile) const;
 
 	void UnLoadKey(
-		LPCTSTR pSubkeyName) const;
+        LPCSTR pSubkeyName) const;
 
 	void SaveKey(
-		LPCTSTR pFile,
+        LPCSTR pFile,
 		LPSECURITY_ATTRIBUTES pSecurityAttributes = NULL) const;
 
 	void RestoreKey(
-		LPCTSTR pFile,
+        LPCSTR pFile,
 		DWORD flags = 0) const;
 
 	void ReplaceKey(
-		LPCTSTR pNewFile,
-		LPCTSTR pOldFile,
-		LPCTSTR pSubkeyName = 0) const;
+        LPCSTR pNewFile,
+        LPCSTR pOldFile,
+        LPCSTR pSubkeyName = 0) const;
 
 	PSECURITY_DESCRIPTOR GetKeySecurity(
 		SECURITY_INFORMATION securityInformation) const;

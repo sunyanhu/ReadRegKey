@@ -40,7 +40,7 @@ inline bool BOOL_to_bool(const BOOL bResult)
     return (TRUE == bResult);
 }
 
-const LPTSTR GetLastErrorMessage(DWORD last_error);
+const LPSTR GetLastErrorMessage(DWORD last_error);
 }
 #endif // __UTILS__
 
